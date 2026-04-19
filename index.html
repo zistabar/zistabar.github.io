@@ -181,20 +181,50 @@
             var themeToggleBtn = document.getElementById('theme-toggle');
 
             function syncAriaPressed() {
-                themeToggleBtn.setAttribute('aria-pressed', docHtml.classList.contains('dark') ? 'true' : 'false');
+                if (themeToggleBtn) {
+                    themeToggleBtn.setAttribute('aria-pressed', docHtml.classList.contains('dark') ? 'true' : 'false');
+                }
+            }
+
+            function applyThemeFromStorage() {
+                var stored = localStorage.getItem('color-theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var useDark = stored === 'dark' || (stored === null && prefersDark);
+                if (useDark) {
+                    docHtml.classList.add('dark');
+                } else {
+                    docHtml.classList.remove('dark');
+                }
+                syncAriaPressed();
             }
 
             syncAriaPressed();
 
-            themeToggleBtn.addEventListener('click', function () {
-                if (docHtml.classList.contains('dark')) {
-                    docHtml.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    docHtml.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    if (docHtml.classList.contains('dark')) {
+                        docHtml.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        docHtml.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                    syncAriaPressed();
+                });
+            }
+
+            // Sync theme when returning via "Back" button (bfcache)
+            window.addEventListener('pageshow', function(e) {
+                if (e.persisted) {
+                    applyThemeFromStorage();
                 }
-                syncAriaPressed();
+            });
+
+            // Sync theme when it changes in a different tab
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'color-theme') {
+                    applyThemeFromStorage();
+                }
             });
         })();
     </script>
