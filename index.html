@@ -214,14 +214,14 @@
             }
 
             // Sync theme when returning via "Back" button (bfcache)
-            window.addEventListener('pageshow', function(e) {
+            window.addEventListener('pageshow', function (e) {
                 if (e.persisted) {
                     applyThemeFromStorage();
                 }
             });
 
             // Sync theme when it changes in a different tab
-            window.addEventListener('storage', function(e) {
+            window.addEventListener('storage', function (e) {
                 if (e.key === 'color-theme') {
                     applyThemeFromStorage();
                 }
