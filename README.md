@@ -1,7 +1,10 @@
 # zistabar.github.io
 
-Personal landing page. Plain HTML, CSS and JavaScript — no build step, no
-dependencies.
+Personal landing page, served at <https://zieta.me>. Plain HTML, CSS and
+JavaScript — no build step, no dependencies.
+
+Pushing to `main` deploys it: GitHub Pages builds from the branch root, and
+`CNAME` points the custom domain at it.
 
 ## Layout
 
