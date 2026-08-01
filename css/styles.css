@@ -1,0 +1,259 @@
+/* ---- Theme tokens ------------------------------------------------------- */
+:root {
+  --bg: #fffdf7;
+  --panel: #f4eee0;
+  --fg: #100d07;
+  --muted: #5d564a;
+  --line: #c7bda6;
+  --accent: oklch(0.49 0.21 33);
+  --boid: oklch(0.55 0.18 33);
+
+  --serif: "EB Garamond", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16140f;
+    --panel: #1e1b15;
+    --fg: #f0ebe0;
+    --muted: #948b7c;
+    --line: #332e25;
+    --accent: oklch(0.72 0.18 45);
+    --boid: oklch(0.66 0.15 45);
+  }
+}
+
+/* Explicit user choice wins over the OS preference. */
+html[data-theme="light"] {
+  --bg: #fffdf7;
+  --panel: #f4eee0;
+  --fg: #100d07;
+  --muted: #5d564a;
+  --line: #c7bda6;
+  --accent: oklch(0.49 0.21 33);
+  --boid: oklch(0.55 0.18 33);
+}
+
+html[data-theme="dark"] {
+  --bg: #16140f;
+  --panel: #1e1b15;
+  --fg: #f0ebe0;
+  --muted: #948b7c;
+  --line: #332e25;
+  --accent: oklch(0.72 0.18 45);
+  --boid: oklch(0.66 0.15 45);
+}
+
+/* ---- Base --------------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The canvas is fixed and click-through, so the page can scroll normally. */
+
+a { color: var(--fg); text-decoration: none; }
+a:hover { color: var(--accent); }
+
+/* ---- Flock canvas ------------------------------------------------------- */
+#flock {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--boid); /* the script reads this as the boid fill colour */
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---- Theme toggle ------------------------------------------------------- */
+#theme-toggle {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+#theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Show the icon of the theme currently in effect. */
+#theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  #theme-toggle .icon-sun { display: none; }
+  #theme-toggle .icon-moon { display: block; }
+}
+html[data-theme="light"] #theme-toggle .icon-sun { display: block; }
+html[data-theme="light"] #theme-toggle .icon-moon { display: none; }
+html[data-theme="dark"] #theme-toggle .icon-sun { display: none; }
+html[data-theme="dark"] #theme-toggle .icon-moon { display: block; }
+
+/* ---- Content ------------------------------------------------------------ */
+main {
+  position: relative;
+  min-height: 100vh;
+  padding: 96px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 76px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.role {
+  margin: 18px 0 0;
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.rule {
+  width: 110px;
+  height: 3px;
+  margin: 40px 0 0;
+  border: 0;
+  background: var(--accent);
+}
+
+.summary {
+  margin: 32px 0 0;
+  max-width: 52ch;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.cta { margin: 64px 0 0; }
+
+.button {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 8px 24px;
+}
+
+.button:hover { color: var(--bg); background: var(--accent); }
+
+.links {
+  margin-top: clamp(64px, 12vh, 150px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 34px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+}
+
+.links a {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+}
+
+/* ---- Idle footnote ------------------------------------------------------ */
+#footnote {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 3;
+  width: 330px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+  padding: 18px 20px 17px;
+  animation: footnote-in 520ms ease both;
+}
+
+#footnote[hidden] { display: none; }
+
+#footnote header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+#footnote .label {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+#footnote-close {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+#footnote-close:hover { color: var(--accent); }
+
+#footnote p {
+  margin: 10px 0 0;
+  font-family: var(--serif);
+  font-size: 15.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+#footnote p.muted { color: var(--muted); }
+#footnote a { border-bottom: 1px solid var(--accent); }
+
+@keyframes footnote-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Small screens ------------------------------------------------------ */
+@media (max-height: 820px) {
+  main { padding: 72px 120px; }
+  .cta { margin-top: 40px; }
+  .links { margin-top: 48px; }
+}
+
+@media (max-width: 720px) {
+  main { padding: 88px 28px 56px; }
+  h1 { font-size: 46px; }
+  .role { font-size: 20px; }
+  .summary { font-size: 18px; }
+  .button { font-size: 18px; }
+  .links { margin-top: 56px; }
+  #footnote { left: 20px; right: 20px; bottom: 20px; width: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #footnote { animation: none; }
+}
