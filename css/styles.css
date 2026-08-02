@@ -125,9 +125,10 @@ h1 {
 .pronunciation {
   margin: 18px 0 0;
   font-family: var(--serif);
-  font-size: 26px;
-  line-height: 1.25;
+  font-size: 18px;
+  line-height: 1.45;
   color: var(--muted);
+  max-width: 52ch;
 }
 
 .rule {
@@ -247,7 +248,7 @@ h1 {
 @media (max-width: 720px) {
   main { padding: 88px 28px 56px; }
   h1 { font-size: 46px; }
-  .pronunciation { font-size: 20px; }
+  .pronunciation { font-size: 16px; }
   .summary { font-size: 18px; }
   .button { font-size: 18px; }
   .links { margin-top: 56px; }
