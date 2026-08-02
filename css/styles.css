@@ -122,7 +122,7 @@ h1 {
   font-weight: 500;
 }
 
-.role {
+.pronunciation {
   margin: 18px 0 0;
   font-family: var(--serif);
   font-size: 18px;
@@ -248,7 +248,7 @@ h1 {
 @media (max-width: 720px) {
   main { padding: 88px 28px 56px; }
   h1 { font-size: 46px; }
-  .role { font-size: 16px; }
+  .pronunciation { font-size: 16px; }
   .summary { font-size: 18px; }
   .button { font-size: 18px; }
   .links { margin-top: 56px; }
