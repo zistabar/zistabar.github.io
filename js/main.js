@@ -46,6 +46,7 @@
   // ---- Idle footnote ----------------------------------------------------
   var footnote = document.getElementById('footnote');
   var closeButton = document.getElementById('footnote-close');
+  var desktop = window.matchMedia('(min-width: 721px)'); // matches the stylesheet breakpoint
   var lastActivity = Date.now();
   var lastX = null;
   var lastY = null;
@@ -73,7 +74,7 @@
 
   // Once shown, the footnote stays until it is dismissed.
   setInterval(function () {
-    if (dismissed || !footnote.hidden) return;
+    if (dismissed || !footnote.hidden || !desktop.matches) return;
     if (Date.now() - lastActivity >= IDLE_SECONDS * 1000) footnote.hidden = false;
   }, 500);
 })();

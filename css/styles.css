@@ -251,7 +251,8 @@ h1 {
   .summary { font-size: 18px; }
   .button { font-size: 18px; }
   .links { margin-top: 56px; }
-  #footnote { left: 20px; right: 20px; bottom: 20px; width: auto; }
+  /* The footnote is a desktop-only aside. */
+  #footnote { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
