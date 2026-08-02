@@ -98,6 +98,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  --stack-gap: 64px; /* space above the button, and above the links on narrow screens */
 }
 
 h1 {
@@ -145,7 +146,7 @@ h1 {
   color: var(--accent);
 }
 
-.cta { margin: 64px 0 0; }
+.cta { margin: var(--stack-gap) 0 0; }
 
 .button {
   display: inline-block;
@@ -237,20 +238,22 @@ h1 {
 
 /* ---- Small screens ------------------------------------------------------ */
 @media (max-height: 820px) {
-  main { padding: 72px 120px; }
-  .cta { margin-top: 40px; }
+  main { padding: 72px 120px; --stack-gap: 40px; }
   .links { margin-top: 48px; }
 }
 
 @media (max-width: 720px) {
-  main { padding: 88px 28px 56px; }
+  /* "safe" keeps the centring from pushing the ends off-screen when the page
+     is taller than the viewport, which is the common case on a phone. */
+  main { padding: 88px 28px 56px; justify-content: safe center; }
   /* Text spans the full width here, so dim the whole flock instead of fading a column. */
   #flock { opacity: 0.3; }
   h1 { font-size: 46px; }
   .pronunciation { font-size: 16px; }
   .summary { font-size: 18px; }
   .button { font-size: 18px; }
-  .links { margin-top: 56px; }
+  /* Match the gap above the button, so the last line doesn't drift to the edge. */
+  .links { margin-top: var(--stack-gap); }
   /* The footnote is a desktop-only aside. */
   #footnote { display: none; }
 }
