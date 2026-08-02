@@ -15,15 +15,9 @@
   // ---- Theme ------------------------------------------------------------
   var toggle = document.getElementById('theme-toggle');
 
-  function prefersDark() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
-
   function currentlyDark() {
-    var explicit = document.documentElement.dataset.theme;
-    if (explicit === 'dark') return true;
-    if (explicit === 'light') return false;
-    return prefersDark();
+    // Dark is the default, so anything other than an explicit "light" is dark.
+    return document.documentElement.dataset.theme !== 'light';
   }
 
   function applyTheme(theme) {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Andrzej Zieta</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/css/styles.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('color-theme');
+    var theme = stored === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  })();
+</script>
+</head>
+<body>
+  <button id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+    <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2"></circle>
+      <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"></path>
+    </svg>
+    <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+    </svg>
+  </button>
+
+  <main>
+    <p class="status">Error 404</p>
+    <h1>Strayed from the flock</h1>
+    <hr class="rule">
+    <p class="summary">This page doesn&rsquo;t exist &mdash; wrong link, old address or a typo. Nothing here to steer toward.</p>
+
+    <p class="cta"><a class="button" href="/">back to the start</a></p>
+  </main>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('theme-toggle');
+      toggle.addEventListener('click', function () {
+        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        document.documentElement.classList.toggle('dark', next === 'dark');
+        localStorage.setItem('color-theme', next);
+      });
+    })();
+  </script>
+</body>
+</html>

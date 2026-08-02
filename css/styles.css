@@ -1,30 +1,18 @@
 /* ---- Theme tokens ------------------------------------------------------- */
+/* Dark is the default; html[data-theme="light"] opts out. */
 :root {
-  --bg: #fffdf7;
-  --panel: #f4eee0;
-  --fg: #100d07;
-  --muted: #5d564a;
-  --line: #c7bda6;
-  --accent: oklch(0.49 0.21 33);
-  --boid: oklch(0.55 0.18 33);
+  --bg: #16140f;
+  --panel: #1e1b15;
+  --fg: #f0ebe0;
+  --muted: #948b7c;
+  --line: #332e25;
+  --accent: oklch(0.72 0.18 45);
+  --boid: oklch(0.66 0.15 45);
 
   --serif: "EB Garamond", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16140f;
-    --panel: #1e1b15;
-    --fg: #f0ebe0;
-    --muted: #948b7c;
-    --line: #332e25;
-    --accent: oklch(0.72 0.18 45);
-    --boid: oklch(0.66 0.15 45);
-  }
-}
-
-/* Explicit user choice wins over the OS preference. */
 html[data-theme="light"] {
   --bg: #fffdf7;
   --panel: #f4eee0;
@@ -92,12 +80,9 @@ a:hover { color: var(--accent); }
 
 #theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
-/* Show the icon of the theme currently in effect. */
-#theme-toggle .icon-moon { display: none; }
-@media (prefers-color-scheme: dark) {
-  #theme-toggle .icon-sun { display: none; }
-  #theme-toggle .icon-moon { display: block; }
-}
+/* Show the icon of the theme currently in effect (dark by default). */
+#theme-toggle .icon-sun { display: none; }
+#theme-toggle .icon-moon { display: block; }
 html[data-theme="light"] #theme-toggle .icon-sun { display: block; }
 html[data-theme="light"] #theme-toggle .icon-moon { display: none; }
 html[data-theme="dark"] #theme-toggle .icon-sun { display: none; }
@@ -146,6 +131,16 @@ h1 {
   font-size: 21px;
   line-height: 1.55;
   text-wrap: pretty;
+}
+
+/* Small label above the heading on 404.html. */
+.status {
+  margin: 0 0 20px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .cta { margin: 64px 0 0; }
